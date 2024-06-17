@@ -26,13 +26,15 @@ const Home = () => {
 
   return (
     <main>
-      {articles.map((article) => (
-        <div key={article.article_id}>
-          <img src={article.article_img_url} alt={article.title} />
-          <h2>{article.title}</h2>
-          <p>{article.topic}</p>
-        </div>
-      ))}
+      <ul>
+        {articles.map((article) => (
+          <li className='articleCard' key={article.article_id}>
+            <img src={article.article_img_url} alt={article.title} />
+            <h2>{article.title}</h2>
+            <p>{article.topic}</p>
+          </li>
+        ))}
+      </ul>
     </main>
   )
 }

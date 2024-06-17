@@ -4,6 +4,23 @@ h1 {
   line-height: 1.1;
 }
 
+header {
+  display: flex;
+  flex-direction: column;
+  border: 3px solid black;
+  margin-bottom: 16px;
+}
+
+nav a {
+  border: 2px solid black;
+  border-radius: 8px;
+  margin: 4px;
+  padding: 5px 5px 5px 5px;
+}
+nav {
+  margin-bottom: 16px;
+}
+
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -15,10 +32,25 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
-button:hover {
-  border-color: #646cff;
+
+ul {
+  display: flex;
+  list-style-type: none;
+  flex-wrap: wrap;
 }
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+main{
+  display: flex;
+}
+
+.articleCard {
+  border: 2px dashed;
+  width: 250px;
+  margin: 8px;
+  padding: 8px;
+  flex: auto;
+  text-align: center;
+}
+
+img{
+  width: 50%
 }
