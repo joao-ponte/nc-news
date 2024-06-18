@@ -4,7 +4,7 @@ const CommentCard = ({ comment, onDelete }) => {
   const { author, body, votes } = comment
 
   return (
-    <div>
+    <div className="comment-card">
       <p>
         <strong>{author}</strong>
       </p>
