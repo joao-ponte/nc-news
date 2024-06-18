@@ -22,6 +22,7 @@ const CommentList = ({ article_id }) => {
 
   if (loading) return <p>Loading comments...</p>
   if (error) return <p>Error loading comments: {error}</p>
+  if (comments.length === 0) return <p>No comments yet</p>
 
   return (
     <div className="comment-list">
