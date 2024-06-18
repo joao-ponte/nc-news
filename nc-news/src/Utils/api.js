@@ -19,3 +19,18 @@ export const fetchArticleById = (article_id) => {
 export const fetchUsers = () => {
   return api.get('/users')
 }
+
+export const fetchCommentsByArticleId = (article_id) => {
+  return api.get(`/articles/${article_id}/comments`)
+}
+
+export const postComment = (article_id, body, username) => {
+  return api.post(`/articles/${article_id}/comments`, {
+    username,
+    body,
+  })
+}
+
+export const deleteComment = (comment_id) => {
+  return api.delete(`/comments/${comment_id}`)
+}
