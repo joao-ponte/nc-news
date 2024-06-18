@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { fetchArticleById } from '../Utils/api'
 import { formatDate } from '../Utils/formatDate'
+import CommentList from './CommentList'
 
 const ArticlePage = () => {
   const { article_id } = useParams()
@@ -38,6 +39,7 @@ const ArticlePage = () => {
       </div>
       <p>{article.body}</p>
       <p>Votes: {article.votes}</p>
+      <CommentList article_id={article_id} />
     </article>
   )
 }
