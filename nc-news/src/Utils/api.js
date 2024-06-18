@@ -34,3 +34,7 @@ export const postComment = (article_id, body, username) => {
 export const deleteComment = (comment_id) => {
   return api.delete(`/comments/${comment_id}`)
 }
+
+export const voteOnArticle = (article_id, inc_votes) => {
+  return api.patch(`/articles/${article_id}`, { inc_votes })
+}

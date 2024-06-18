@@ -124,3 +124,18 @@ article p:last-of-type {
   padding: 0.5rem 1rem;
   border-radius: 5px;
 }
+
+button {
+  background-color: #28a745;
+  color: #fff;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #218838;
+}
+
+.vote-error {
+  color: red;
+  margin-top: 0.5rem;
+}
