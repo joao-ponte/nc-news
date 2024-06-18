@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { fetchArticleById, voteOnArticle } from '../Utils/api'
 import { formatDate } from '../Utils/formatDate'
-import CommentList from './CommentList'
+import CommentSection from './CommentSection'
 
 const ArticlePage = () => {
   const { article_id } = useParams()
@@ -15,7 +15,6 @@ const ArticlePage = () => {
     setLoading(true)
     fetchArticleById(article_id)
       .then((response) => {
-        console.log(response)
         setArticle(response.data)
         setLoading(false)
       })
@@ -60,7 +59,7 @@ const ArticlePage = () => {
         <button onClick={() => handleVote(-1)}>Downvote</button>
       </div>
       {voteError && <p className="vote-error">{voteError}</p>}
-      <CommentList article_id={article_id} />
+      <CommentSection article_id={article_id} />
     </article>
   )
 }
