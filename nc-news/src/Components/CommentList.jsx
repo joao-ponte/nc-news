@@ -2,7 +2,6 @@ import React from 'react'
 import CommentCard from './CommentCard'
 
 const CommentList = ({ comments }) => {
-  console.log(comments)
   if (comments.length === 0) return <p>No comments yet</p>
 
   return (
