@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from 'react'
 import { fetchArticles } from '../Utils/api'
+import { Link } from 'react-router-dom'
 
 const Home = () => {
   const [articles, setArticles] = useState([])
@@ -28,10 +29,12 @@ const Home = () => {
     <main>
       <ul>
         {articles.map((article) => (
-          <li className='articleCard' key={article.article_id}>
-            <img src={article.article_img_url} alt={article.title} />
-            <h2>{article.title}</h2>
-            <p>{article.topic}</p>
+          <li className="articleCard" key={article.article_id}>
+            <Link to={`/articles/${article.article_id}`}>
+              <img src={article.article_img_url} alt={article.title} />
+              <h2>{article.title}</h2>
+              <p>{article.topic}</p>
+            </Link>
           </li>
         ))}
       </ul>

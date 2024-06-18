@@ -12,6 +12,10 @@ export const fetchTopics = () => {
   return api.get('/topics')
 }
 
+export const fetchArticleById = (article_id) => {
+  return api.get(`/articles/${article_id}`)
+}
+
 export const fetchUsers = () => {
   return api.get('/users')
 }
