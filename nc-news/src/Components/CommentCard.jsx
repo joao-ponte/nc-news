@@ -1,9 +1,8 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { deleteComment } from '../Utils/api'
-import { useContext } from 'react'
 import { UserContext } from '../context/UserContext'
 
-const CommentCard = ({ comment, onDelete }) => {
+const CommentCard = ({ comment, setComments }) => {
   const { author, body, votes, comment_id } = comment
   const { user } = useContext(UserContext)
   const [deleting, setDeleting] = useState(false)
@@ -13,7 +12,9 @@ const CommentCard = ({ comment, onDelete }) => {
     deleteComment(comment_id)
       .then(() => {
         console.log(`Successfully deleted comment with ID: ${comment_id}`)
-        onDelete(comment_id)
+        setComments((prevComments) =>
+          prevComments.filter((c) => c.comment_id !== comment_id)
+        )
       })
       .catch((err) => {
         console.error(

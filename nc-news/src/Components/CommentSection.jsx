@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react'
 import { fetchCommentsByArticleId, postComment } from '../Utils/api'
-import CommentList from './CommentList'
 import { UserContext } from '../context/UserContext'
+import CommentCard from './CommentCard'
 import './Style/CommentSection.css'
 
 const CommentSection = ({ article_id }) => {
@@ -51,12 +51,6 @@ const CommentSection = ({ article_id }) => {
       })
   }
 
-  const handleDeleteComment = (comment_id) => {
-    setComments((prevComments) =>
-      prevComments.filter((comment) => comment.comment_id !== comment_id)
-    )
-  }
-
   if (loading) return <p>Loading comments...</p>
   if (error) return <p>Error loading comments: {error}</p>
 
@@ -75,7 +69,19 @@ const CommentSection = ({ article_id }) => {
         </button>
         {postingError && <p className="error">{postingError}</p>}
       </form>
-      <CommentList comments={comments} onDelete={handleDeleteComment} />
+      <div className="comment-list">
+        {comments.length === 0 ? (
+          <p>No comments yet</p>
+        ) : (
+          comments.map((comment) => (
+            <CommentCard
+              key={comment.comment_id}
+              comment={comment}
+              setComments={setComments}
+            />
+          ))
+        )}
+      </div>
     </div>
   )
 }
