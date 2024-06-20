@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react'
 import { fetchArticles } from '../Utils/api'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useSearchParams } from 'react-router-dom'
 
 const Home = () => {
   const { topic } = useParams()
   const [articles, setArticles] = useState([])
-  const [sortBy, setSortBy] = useState('created_at')
-  const [order, setOrder] = useState('desc')
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [searchParams, setSearchParams] = useSearchParams()
+
+  const sortBy = searchParams.get('sort_by') || 'created_at'
+  const order = searchParams.get('order') || 'desc'
 
   useEffect(() => {
     setLoading(true)
@@ -23,12 +25,35 @@ const Home = () => {
       })
   }, [topic, sortBy, order])
 
+  const handleSortChange = (event) => {
+    setSearchParams({ sort_by: event.target.value, order })
+  }
+
+  const handleOrderChange = () => {
+    setSearchParams({
+      sort_by: sortBy,
+      order: order === 'asc' ? 'desc' : 'asc',
+    })
+  }
+
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error: {error}</p>
 
   return (
     <main>
       <h2>{topic ? `Articles on ${topic}` : 'All Articles'}</h2>
+      <div>
+        <label>
+          Sort by:
+          <select value={sortBy} onChange={handleSortChange}>
+            <option value="created_at">Date</option>
+            <option value="votes">Votes</option>
+          </select>
+        </label>
+        <button onClick={handleOrderChange}>
+          Order: {order === 'asc' ? 'Ascending' : 'Descending'}
+        </button>
+      </div>
       <ul>
         {articles.map((article) => (
           <li className="articleCard" key={article.article_id}>
