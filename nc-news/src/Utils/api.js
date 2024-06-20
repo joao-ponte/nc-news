@@ -5,11 +5,16 @@ const api = axios.create({
 })
 
 export const fetchArticles = (topic, sortBy = 'created_at', order = 'desc') => {
-  let url = `/articles?sort_by=${sortBy}&order=${order}`
-  if (topic) {
-    url += `&topic=${topic}`
+  const params = {
+    sort_by: sortBy,
+    order: order,
   }
-  return api.get(url)
+  
+  if (topic) {
+    params.topic = topic
+  }
+
+  return api.get('/articles', { params })
 }
 
 export const fetchTopics = () => {
