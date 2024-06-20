@@ -1,8 +1,9 @@
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect } from 'react'
 import { fetchArticles } from '../Utils/api'
-import { Link } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 
 const Home = () => {
+  const { topic } = useParams()
   const [articles, setArticles] = useState([])
   const [sortBy, setSortBy] = useState('created_at')
   const [order, setOrder] = useState('desc')
@@ -11,7 +12,7 @@ const Home = () => {
 
   useEffect(() => {
     setLoading(true)
-    fetchArticles()
+    fetchArticles(topic, sortBy, order)
       .then((response) => {
         setArticles(response.data)
         setLoading(false)
@@ -20,13 +21,14 @@ const Home = () => {
         setError(err.message)
         setLoading(false)
       })
-  }, [sortBy, order])
+  }, [topic, sortBy, order])
 
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error: {error}</p>
 
   return (
     <main>
+      <h2>{topic ? `Articles on ${topic}` : 'All Articles'}</h2>
       <ul>
         {articles.map((article) => (
           <li className="articleCard" key={article.article_id}>
