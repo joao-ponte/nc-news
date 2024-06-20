@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { fetchArticles } from '../Utils/api'
 import { useParams, Link, useSearchParams } from 'react-router-dom'
+import LoadingErrorHandler from './LoadingErrorHandler'
 
 const Home = () => {
   const { topic } = useParams()
@@ -20,7 +21,8 @@ const Home = () => {
         setLoading(false)
       })
       .catch((err) => {
-        setError(err.message)
+        console.log(err.response.status)
+        setError(err.response.status)
         setLoading(false)
       })
   }, [topic, sortBy, order])
@@ -36,36 +38,36 @@ const Home = () => {
     })
   }
 
-  if (loading) return <p>Loading...</p>
-  if (error) return <p>Error: {error}</p>
-
   return (
-    <main>
-      <h2>{topic ? `Articles on ${topic}` : 'All Articles'}</h2>
-      <div>
-        <label>
-          Sort by:
-          <select value={sortBy} onChange={handleSortChange}>
-            <option value="created_at">Date</option>
-            <option value="votes">Votes</option>
-          </select>
-        </label>
-        <button onClick={handleOrderChange}>
-          Order: {order === 'asc' ? 'Ascending' : 'Descending'}
-        </button>
-      </div>
-      <ul>
-        {articles.map((article) => (
-          <li className="articleCard" key={article.article_id}>
-            <Link to={`/articles/${article.article_id}`}>
-              <img src={article.article_img_url} alt={article.title} />
-              <h2>{article.title}</h2>
-              <p>{article.topic}</p>
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </main>
+    <LoadingErrorHandler loading={loading} error={error}>
+      <main>
+        <h2>{topic ? `Articles on ${topic}` : 'All Articles'}</h2>
+        <div>
+          <label>
+            Sort by:
+            <select value={sortBy} onChange={handleSortChange}>
+              <option value="created_at">Date</option>
+              <option value="votes">Votes</option>
+              <option value="comment_count">Comment Count</option>
+            </select>
+          </label>
+          <button onClick={handleOrderChange}>
+            Order: {order === 'asc' ? 'Ascending' : 'Descending'}
+          </button>
+        </div>
+        <ul>
+          {articles.map((article) => (
+            <li className="articleCard" key={article.article_id}>
+              <Link to={`/articles/${article.article_id}`}>
+                <img src={article.article_img_url} alt={article.title} />
+                <h2>{article.title}</h2>
+                <p>{article.topic}</p>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </main>
+    </LoadingErrorHandler>
   )
 }
 
