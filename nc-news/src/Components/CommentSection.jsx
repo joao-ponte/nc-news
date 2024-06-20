@@ -51,6 +51,12 @@ const CommentSection = ({ article_id }) => {
       })
   }
 
+  const handleDeleteComment = (comment_id) => {
+    setComments((prevComments) =>
+      prevComments.filter((comment) => comment.comment_id !== comment_id)
+    )
+  }
+
   if (loading) return <p>Loading comments...</p>
   if (error) return <p>Error loading comments: {error}</p>
 
@@ -69,7 +75,7 @@ const CommentSection = ({ article_id }) => {
         </button>
         {postingError && <p className="error">{postingError}</p>}
       </form>
-      <CommentList comments={comments} />
+      <CommentList comments={comments} onDelete={handleDeleteComment} />
     </div>
   )
 }
