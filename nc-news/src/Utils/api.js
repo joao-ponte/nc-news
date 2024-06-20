@@ -4,8 +4,12 @@ const api = axios.create({
   baseURL: 'https://be-nc-news-ttz6.onrender.com/api',
 })
 
-export const fetchArticles = (sortBy = 'created_at', order = 'desc') => {
-  return api.get('/articles')
+export const fetchArticles = (topic, sortBy = 'created_at', order = 'desc') => {
+  let url = `/articles?sort_by=${sortBy}&order=${order}`
+  if (topic) {
+    url += `&topic=${topic}`
+  }
+  return api.get(url)
 }
 
 export const fetchTopics = () => {
