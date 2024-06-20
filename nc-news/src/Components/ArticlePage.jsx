@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { fetchArticleById, voteOnArticle } from '../Utils/api'
 import { formatDate } from '../Utils/formatDate'
 import CommentSection from './CommentSection'
+import NotFound from './NotFound'
 
 const ArticlePage = () => {
   const { article_id } = useParams()
@@ -19,7 +20,8 @@ const ArticlePage = () => {
         setLoading(false)
       })
       .catch((err) => {
-        setError(err.message)
+        console.log(err.response.data.message)
+        setError(err.response.data.message)
         setLoading(false)
       })
   }, [article_id])
@@ -41,6 +43,7 @@ const ArticlePage = () => {
   }
 
   if (loading) return <p>Loading...</p>
+  if (error === 'Resource not found') return <NotFound />
   if (error) return <p>Error: {error}</p>
   if (!article) return <p>No article found</p>
 
