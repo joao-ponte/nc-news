@@ -48,7 +48,6 @@ const Home = () => {
             <select value={sortBy} onChange={handleSortChange}>
               <option value="created_at">Date</option>
               <option value="votes">Votes</option>
-              <option value="comment_count">Comment Count</option>
             </select>
           </label>
           <button onClick={handleOrderChange}>
