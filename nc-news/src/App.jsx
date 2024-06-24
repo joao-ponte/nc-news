@@ -1,7 +1,7 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
-import Header from './Components/Header'
-import Home from './Components/Home'
+import Header from './Components/Header/Header'
+import Home from './Components/Home/Home'
 import ArticlePage from './Components/ArticlePage'
 import NotFound from './Components/NotFound'
 

@@ -1,36 +1,16 @@
-h1 {
-  padding-left: 8px;
-  font-size: 3.2em;
-  line-height: 1.1;
+article {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+a {
+  text-decoration: none;
 }
 
-header {
-  display: flex;
-  flex-direction: column;
-  border: 3px solid black;
-  margin-bottom: 16px;
+a:visited {
+  text-decoration: none;
 }
 
-nav a {
-  border: 2px solid black;
-  border-radius: 8px;
-  margin: 4px;
-  padding: 5px 5px 5px 5px;
-}
-nav {
-  margin-bottom: 16px;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
+a:hover {
+  text-decoration: underline;
 }
 
 ul {
@@ -39,8 +19,7 @@ ul {
   flex-wrap: wrap;
 }
 main {
-  display: flex;
-  flex-direction: column;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .articleCard {
@@ -60,7 +39,7 @@ body {
   font-family: 'Georgia', serif;
   line-height: 1.6;
   background-color: #f4f4f4;
-  padding: 20px;
+  /* padding: 20px; */
 }
 
 article {
@@ -124,16 +103,6 @@ article p:last-of-type {
   color: #fff;
   padding: 0.5rem 1rem;
   border-radius: 5px;
-}
-
-button {
-  background-color: #28a745;
-  color: #fff;
-  border-radius: 5px;
-}
-
-button:hover {
-  background-color: #218838;
 }
 
 .vote-error {

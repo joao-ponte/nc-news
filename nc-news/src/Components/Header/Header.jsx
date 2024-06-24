@@ -1,7 +1,8 @@
 import { useContext } from 'react'
 import { Link } from 'react-router-dom'
-import { TopicsContext } from '../context/TopicsContext'
-import { UserContext } from '../context/UserContext'
+import { TopicsContext } from '../../context/TopicsContext'
+import { UserContext } from '../../context/UserContext'
+import './header.css'
 
 const Header = () => {
   const {
@@ -31,9 +32,6 @@ const Header = () => {
 
   return (
     <header>
-      <h1>
-        <Link to="/">NC-News</Link>
-      </h1>
       <nav>
         {topics.map((topic) => (
           <Link key={topic.slug} to={`/${topic.slug}`}>
@@ -41,8 +39,12 @@ const Header = () => {
           </Link>
         ))}
       </nav>
-      <div>
-        <select onChange={handleUserChange} value={user?.username || ''}>
+      <div className="titleWrapper">
+        <select
+          className="selectUser"
+          onChange={handleUserChange}
+          value={user?.username || ''}
+        >
           <option value="" disabled>
             Select user
           </option>
@@ -52,6 +54,9 @@ const Header = () => {
             </option>
           ))}
         </select>
+        <h1 className="title">
+          <Link to="/">NC-News</Link>
+        </h1>
       </div>
     </header>
   )

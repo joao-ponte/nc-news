@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
-import { fetchArticles } from '../Utils/api'
+import { fetchArticles } from '../../Utils/api'
 import { useParams, Link, useSearchParams } from 'react-router-dom'
-import LoadingErrorHandler from './LoadingErrorHandler'
+import LoadingErrorHandler from '../LoadingErrorHandler'
+import './home.css'
 
 const Home = () => {
   const { topic } = useParams()
@@ -41,18 +42,20 @@ const Home = () => {
   return (
     <LoadingErrorHandler loading={loading} error={error}>
       <main>
-        <h2>{topic ? `Articles on ${topic}` : 'All Articles'}</h2>
-        <div>
-          <label>
-            Sort by:
-            <select value={sortBy} onChange={handleSortChange}>
-              <option value="created_at">Date</option>
-              <option value="votes">Votes</option>
-            </select>
-          </label>
-          <button onClick={handleOrderChange}>
-            Order: {order === 'asc' ? 'Ascending' : 'Descending'}
-          </button>
+        <div className="filterBar">
+          <h2>{topic ? `Articles on ${topic}` : 'All Articles'}</h2>
+          <div>
+            <label>
+              Sort by:
+              <select className='sortBy' value={sortBy} onChange={handleSortChange}>
+                <option value="created_at">Date</option>
+                <option value="votes">Votes</option>
+              </select>
+            </label>
+            <button className="orderButton" onClick={handleOrderChange}>
+              {order === 'asc' ? '⬆' : '⬇'}
+            </button>
+          </div>
         </div>
         <ul>
           {articles.map((article) => (
